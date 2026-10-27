@@ -186,7 +186,7 @@ public class MainAuctionGui extends PaginatedGui {
         // My listings button
         if (player.hasPermission("playerauctions.sell")) {
             net.kyori.adventure.text.Component myListingsName = kah.getConfigManager()
-                    .getMessage("gui.control-items.my-listings", null);
+                    .getMessage("gui.control-items.my-listings");
             kah.getAuctionService().getPlayerActiveAuctionCount(player.getUniqueId()).thenAccept(count -> {
                 int maxListings = kah.getConfigManager().getConfig().getInt("auction.max-auctions-per-player", 5);
                 List<String> myListingsLore = new ArrayList<>();
@@ -204,8 +204,7 @@ public class MainAuctionGui extends PaginatedGui {
         }
 
         // Mailbox button
-        net.kyori.adventure.text.Component mailboxName = kah.getConfigManager().getMessage("gui.control-items.mailbox",
-                null);
+        net.kyori.adventure.text.Component mailboxName = kah.getConfigManager().getMessage("gui.control-items.mailbox");
         List<String> mailboxLore = new ArrayList<>();
         mailboxLore.add("");
         mailboxLore.add("<#BDC3C7>Check pending items & money");

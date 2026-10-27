@@ -74,21 +74,19 @@ public class NotificationManager {
                         float pitch = (float) configManager.getConfig().getDouble("auction.notification-sound-pitch",
                                 1.0);
 
-                        // Try to get Sound from enum first (for uppercase enum names like
-                        // "BLOCK_NOTE_BLOCK_PLING")
-                        try {
-                            Sound sound = Sound.valueOf(soundName);
+                        String soundKeyName = soundName.toLowerCase().replace("_", ".");
+                        if (soundKeyName.startsWith("block.block.")) {
+                            soundKeyName = soundKeyName.substring(6);
+                        }
+                        org.bukkit.NamespacedKey key = soundName.contains(":")
+                                ? org.bukkit.NamespacedKey.fromString(soundName.toLowerCase())
+                                : org.bukkit.NamespacedKey.minecraft(soundKeyName);
+
+                        Sound sound = key != null ? org.bukkit.Registry.SOUNDS.get(key) : null;
+                        if (sound != null) {
                             player.playSound(player.getLocation(), sound, volume, pitch);
-                        } catch (IllegalArgumentException e) {
-                            // If enum fails, try as resource location (lowercase with dots like
-                            // "block.note_block.pling")
-                            // Convert enum name format to resource location format if needed
-                            String resourceLocation = soundName.toLowerCase().replace("_", ".");
-                            // Remove "block." prefix if it's there twice
-                            if (resourceLocation.startsWith("block.block.")) {
-                                resourceLocation = resourceLocation.substring(6); // Remove first "block."
-                            }
-                            player.playSound(player.getLocation(), resourceLocation, volume, pitch);
+                        } else {
+                            player.playSound(player.getLocation(), soundKeyName, volume, pitch);
                         }
                     } catch (Exception e) {
                         plugin.getLogger().warning("Failed to play notification sound: " + e.getMessage());

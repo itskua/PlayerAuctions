@@ -1,5 +1,30 @@
 # PlayerAuctions Changelog
 
+## Version 3.1.0-26.3 (October 27, 2026)
+
+### Added / Modernized for Minecraft & Paper 26.3
+- **Paper 26.3 API Upgrade**:
+  - Upgraded dependencies to `io.papermc.paper:paper-api:26.3.build.226-stable`.
+  - Set `api-version: '26.3'` in `plugin.yml`.
+- **Java 25 Bytecode Target**:
+  - Configured Maven compiler for Java 25 release (`<release>25</release>`, major version 69).
+  - Verified compilation and unit tests under OpenJDK 25.
+- **Native Data Component Item Serialization**:
+  - Modernized `SerializedItem` to utilize Paper's binary serialization:
+    - `ItemStack#serializeAsBytes()`
+    - `ItemStack.deserializeBytes(byte[])`
+  - Flawlessly preserves modern 26.3 Minecraft Data Components (custom enchantments, trims, container bundles, components).
+  - Implemented automatic fallback to legacy `BukkitObjectInputStream` to guarantee 100% backward compatibility with existing saved auction files and databases.
+- **Registry Sound Resolution**:
+  - Modernized sound playback in `NotificationManager` using `Registry.SOUNDS.get(NamespacedKey)`.
+  - Added support for resource key resolution and safe fallback to `Sound.ENTITY_EXPERIENCE_ORB_PICKUP`.
+- **Adventure Component GUI Titles**:
+  - Upgraded GUI inventory instantiation in `Gui.java` to `Bukkit.createInventory(holder, size, Component)` to display full RGB and MiniMessage formatted titles.
+- **Dependency Cleanups**:
+  - Removed outdated pinned Adventure 4.14 dependencies from `pom.xml`, allowing Paper 26.3's Adventure BOM to resolve matched library versions cleanly.
+
+---
+
 ## Version 3.1.0 (February 25, 2026)
 
 ### Added

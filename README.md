@@ -1,13 +1,25 @@
 <div align="center">
-  <h1>💰 PlayerAuctions v3.1.0</h1>
-  <p><i>A modern, deeply integrated, and feature-rich Auction House plugin built exclusively for PaperMC 1.21.</i></p>
+  <h1>💰 PlayerAuctions v3.1.0 (Paper 26.3 Edition)</h1>
+  <p><i>A modern, deeply integrated, and feature-rich Auction House plugin built exclusively for PaperMC 26.3 & Java 25.</i></p>
 </div>
+
+> [!NOTE]
+> **🚀 Minecraft 26.3 & Java 25 Support Fork**
+> This fork is updated and optimized for **Minecraft / Paper 26.3** and built strictly targeting **Java 25 (bytecode version 69)** with zero bugs.
+>
+> **Key Updates in this Release:**
+> - **Paper 26.3 API Target**: Built against `io.papermc.paper:paper-api:26.3.build.226-stable` with `api-version: '26.3'`.
+> - **Java 25 Bytecode**: Compiled with Java 25 (`<release>25</release>`, major version 69).
+> - **Native 26.3 Item Component Serialization**: Modernized `SerializedItem` with Paper's native `ItemStack#serializeAsBytes()` and `ItemStack.deserializeBytes(byte[])` to flawlessly preserve complex 26.3 Data Components (custom enchantments, trims, container contents) with automatic fallback for legacy items.
+> - **Registry-Driven Sound Handling**: Modernized sound resolution using `Registry.SOUNDS.get(NamespacedKey)` and Adventure sound keys to eliminate deprecated enum crashes.
+> - **Component GUI Titles**: Upgraded inventory instantiation to Adventure `Component` for native MiniMessage/RGB title formatting.
+> - See [CHANGELOG.md](CHANGELOG.md) for complete details.
 
 ---
 
 ## ✨ Overview
 
-**PlayerAuctions** provides a robust, intuitive, and scalable platform for players to buy and sell items securely. Fully integrated with Vault-based economies and the latest Paper 1.21 API, PlayerAuctions brings a premium marketplace experience to your server.
+**PlayerAuctions** provides a robust, intuitive, and scalable platform for players to buy and sell items securely. Fully integrated with Vault-based economies and Paper 26.3 API, PlayerAuctions brings a premium marketplace experience to your server.
 
 **What's new in v3.1.0?**
 - **Mailbox Integration**: Canceled auctions and sold item revenues are securely routed to the player's personal mailbox, solving inventory management issues!

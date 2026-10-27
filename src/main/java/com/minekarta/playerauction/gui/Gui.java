@@ -30,6 +30,11 @@ public abstract class Gui implements InventoryHolder, Listener {
     }
 
     protected abstract String getTitle();
+
+    protected net.kyori.adventure.text.Component getTitleComponent() {
+        return com.minekarta.playerauction.util.MessageParser.parse(getTitle());
+    }
+
     protected abstract int getSize();
     protected abstract void build();
     protected abstract void onClick(InventoryClickEvent event);
@@ -43,7 +48,7 @@ public abstract class Gui implements InventoryHolder, Listener {
     }
 
     public void open() {
-        inventory = Bukkit.createInventory(this, getSize(), getTitle());
+        inventory = Bukkit.createInventory(this, getSize(), getTitleComponent());
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.build();
 

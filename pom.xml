@@ -11,11 +11,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <maven.compiler.release>25</maven.compiler.release>
         <!-- Version properties -->
-        <minecraft.version>1.21</minecraft.version>
-        <paper.version>1.21.8-R0.1-SNAPSHOT</paper.version>
+        <minecraft.version>26.3</minecraft.version>
+        <paper.version>26.3.build.226-stable</paper.version>
         <if.version>0.11.5</if.version>
         <plugin.version>3.1.0</plugin.version>
         <cloud.version>2.0.0-beta.10</cloud.version>
@@ -61,24 +62,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.kyori</groupId>
-            <artifactId>adventure-api</artifactId>
-            <version>4.14.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.kyori</groupId>
-            <artifactId>adventure-text-minimessage</artifactId>
-            <version>4.14.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.kyori</groupId>
-            <artifactId>adventure-text-serializer-legacy</artifactId>
-            <version>4.14.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>2.0.13</version>
@@ -116,8 +99,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.14.1</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <release>25</release>
                 </configuration>
             </plugin>
             <plugin>

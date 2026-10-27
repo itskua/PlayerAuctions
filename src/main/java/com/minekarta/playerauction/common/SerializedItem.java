@@ -27,11 +27,16 @@ public final class SerializedItem implements Serializable {
         }
         try {
             byte[] bytes = Base64.getDecoder().decode(data);
-            try (ByteArrayInputStream is = new ByteArrayInputStream(bytes);
-                 BukkitObjectInputStream ois = new BukkitObjectInputStream(is)) {
-                return (ItemStack) ois.readObject();
+            try {
+                return ItemStack.deserializeBytes(bytes);
+            } catch (Exception ex) {
+                // Fallback for legacy BukkitObjectInputStream serialized data
+                try (ByteArrayInputStream is = new ByteArrayInputStream(bytes);
+                     BukkitObjectInputStream ois = new BukkitObjectInputStream(is)) {
+                    return (ItemStack) ois.readObject();
+                }
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (Exception e) {
             throw new IllegalStateException("Could not deserialize ItemStack", e);
         }
     }
@@ -41,13 +46,15 @@ public final class SerializedItem implements Serializable {
             return new SerializedItem(null);
         }
         try {
+            return new SerializedItem(Base64.getEncoder().encodeToString(itemStack.serializeAsBytes()));
+        } catch (Exception e) {
             try (ByteArrayOutputStream os = new ByteArrayOutputStream();
                  BukkitObjectOutputStream oos = new BukkitObjectOutputStream(os)) {
                 oos.writeObject(itemStack);
                 return new SerializedItem(Base64.getEncoder().encodeToString(os.toByteArray()));
+            } catch (IOException ioException) {
+                throw new IllegalStateException("Could not serialize ItemStack", ioException);
             }
-        } catch (IOException e) {
-            throw new IllegalStateException("Could not serialize ItemStack", e);
         }
     }
 
